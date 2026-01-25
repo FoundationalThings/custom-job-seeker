@@ -1,7 +1,7 @@
 from googleapiclient.discovery import build
 import google.auth
 
-SPREADSHEET_ID = "PUT_YOUR_SHEET_ID_HERE"
+SPREADSHEET_ID = "1jKdw4CsEbBOarEfYaDODsI88OsNkJBHARB3sV9XaQYQ"
 RANGE = "A2:C"  # start from row 2 to skip headers
 
 def main():
