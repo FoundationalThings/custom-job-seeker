@@ -10,7 +10,7 @@ def fetch_jobs_fedex(url):
         page.goto(url)
         
         # Wait for dynamic content to load
-        page.wait_for_selector(".results-list front")  # FedEx list
+        page.wait_for_selector(".results-list")  # FedEx list
         
         # Extract job details
         jobs = []
