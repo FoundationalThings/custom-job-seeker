@@ -1,0 +1,23 @@
+name: GCP Auth Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  auth-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/1093320976849/locations/global/workloadIdentityPools/job-seeker-aggregation/providers/github
+          service_account: github-actions@ft-home-project.iam.gserviceaccount.com
+
+      - name: Verify authentication
+        run: |
+          echo "Authentication to Google Cloud succeeded"
