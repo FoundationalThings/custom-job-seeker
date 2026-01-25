@@ -10,7 +10,7 @@ def fetch_jobs_home_depot(url):
         page.goto(url)
         
         # Wait for dynamic content to load
-        page.wait_for_selector(".jobs-listing")  # Home Depot list
+        page.wait_for_selector("ul.jobs-content")  # Home Depot list
         
         
         # Extract job details
