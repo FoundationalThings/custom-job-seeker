@@ -22,7 +22,7 @@ def fetch_jobs_home_depot(url):
             #title = all_info["title"]
             # link = all_info["url"]
                                                                 
-            title = card.locator("a.job-info.job-title").inner_text()
+            title = card.locator("a > div.job-info > div.job-title").inner_text()
             link = card.locator("a.job-link").get_attribute("href")
             location = card.locator("a.job-info.job-location").inner_text()
             
