@@ -10,16 +10,16 @@ def fetch_jobs_fedex(url):
         page.goto(url)
         
         # Wait for dynamic content to load
-        page.wait_for_selector(".job-result-list")  # Example selector identifying the job list container
+        page.wait_for_selector(".results-list front")  # FedEx list
         
         # Extract job details
         jobs = []
-        job_cards = page.locator(".job-result-list .job-listing")  # Example, adjust selector as needed
+        job_cards = page.locator(".results-list__item")  # FedEx job
         for i in range(job_cards.count()):
             card = job_cards.nth(i)
-            title = card.locator(".job-title").inner_text()
-            link = card.locator("a").get_attribute("href")
-            location = card.locator(".job-location").inner_text()
+            title = card.locator(".results-list__item-title").inner_text()
+            link = "https://careers.fedex.com/" + card.locator("a").get_attribute("href")
+            location = card.locator(".results-list__item-street--label").inner_text()
             
             jobs.append({
                 "title": title,
