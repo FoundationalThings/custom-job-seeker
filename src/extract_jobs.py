@@ -3,6 +3,7 @@ import google.auth
 import requests
 from bs4 import BeautifulSoup
 from fedex_extractor import fetch_jobs_fedex
+from home_depot_extractor import fetch_jobs_home_depot
 
 
 SPREADSHEET_ID = "1jKdw4CsEbBOarEfYaDODsI88OsNkJBHARB3sV9XaQYQ"
@@ -11,7 +12,9 @@ RANGE = "A2:C"
 def fetch_jobs(url):
     """Route to correct job extractor based on site."""
     if "fedex" in url.lower():
-        return fetch_jobs_fedex(url)  # Use FedEx-specific logic
+        return fetch_jobs_fedex(url)
+    elif "homedepot" in url.lower():
+        return fetch_jobs_home_depot(url)
     else:
         try:
             resp = requests.get(url, timeout=10)
