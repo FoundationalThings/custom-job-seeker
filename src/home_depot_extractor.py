@@ -17,10 +17,7 @@ def fetch_jobs_home_depot(url):
         job_cards = page.locator(".job-link")  # Home Depot job
         for i in range(job_cards.count()):
             card = job_cards.nth(i)
-            new_badge = card.locator(".new-job-badge").inner_text()
             title = card.locator(".job-title").inner_text()
-            if len(new_badge) > 0:
-                title = "[ " + new_badge.upper() + "! ] " + title
             link = card.locator("a.job-link").get_attribute("href")
             location = card.locator(".job-location").inner_text()
             
