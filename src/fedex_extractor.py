@@ -18,7 +18,8 @@ def fetch_jobs_fedex(url):
         for i in range(job_cards.count()):
             card = job_cards.nth(i)
             title = card.locator(".results-list__item-title").inner_text()
-            link = "https://careers.fedex.com/" + card.locator("a").get_attribute("href")
+            link = card.locator("a.results-list__item-title--link").get_attribute("href")
+            link = link = "https://careers.fedex.com/" + link
             location = card.locator(".results-list__item-street--label").inner_text()
             
             jobs.append({
