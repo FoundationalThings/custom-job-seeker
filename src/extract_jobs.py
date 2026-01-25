@@ -2,34 +2,40 @@ from googleapiclient.discovery import build
 import google.auth
 import requests
 from bs4 import BeautifulSoup
+from fedex_extractor import fetch_jobs_fedex
+
 
 SPREADSHEET_ID = "1jKdw4CsEbBOarEfYaDODsI88OsNkJBHARB3sV9XaQYQ"
 RANGE = "A2:C"
 
 def fetch_jobs(url):
-    try:
-        resp = requests.get(url, timeout=10)
-        resp.raise_for_status()
-    except requests.RequestException as e:
-        print(f"ERROR fetching {url}: {e}")
-        return []
-
-    soup = BeautifulSoup(resp.text, "html.parser")
-    jobs = []
-
-    # Example: try to guess job postings
-    # Look for common patterns: links containing "job", "career", or a job listing container
-    for a in soup.find_all("a", href=True):
-        href = a['href']
-        text = a.get_text(strip=True)
-        if text and ("job" in text.lower() or "position" in text.lower()):
-            jobs.append({
-                "title": text,
-                "link": href,
-                "location": None  # will fill if we find location later
-            })
-
-    return jobs
+    """Route to correct job extractor based on site."""
+    if "fedex" in url.lower():
+        return fetch_jobs_fedex(url)  # Use FedEx-specific logic
+    else:
+        try:
+            resp = requests.get(url, timeout=10)
+            resp.raise_for_status()
+        except requests.RequestException as e:
+            print(f"ERROR fetching {url}: {e}")
+            return []
+  
+        soup = BeautifulSoup(resp.text, "html.parser")
+        jobs = []
+    
+        # Example: try to guess job postings
+        # Look for common patterns: links containing "job", "career", or a job listing container
+        for a in soup.find_all("a", href=True):
+            href = a['href']
+            text = a.get_text(strip=True)
+            if text and ("job" in text.lower() or "position" in text.lower()):
+                jobs.append({
+                    "title": text,
+                    "link": href,
+                    "location": None  # will fill if we find location later
+                })
+    
+        return jobs
 
 def main():
     creds, _ = google.auth.default(scopes=[
