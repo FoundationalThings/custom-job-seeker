@@ -23,3 +23,14 @@ jobs:
 
       - name: Confirm auth
         run: gcloud auth list
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Test Sheets access
+        run: python src/test_sheets.py
