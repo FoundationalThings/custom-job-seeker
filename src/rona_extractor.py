@@ -12,7 +12,7 @@ def fetch_jobs_rona(url):
         page.goto(f"{BASE_URL}/careers")
       
         # Wait for dynamic content to load
-        page.wait_for_selector("div.flex.flex-col.gap-6.border.p-6")  # RONA list
+        page.wait_for_selector("main")  # RONA list
         
         # Extract job details
         jobs = []
