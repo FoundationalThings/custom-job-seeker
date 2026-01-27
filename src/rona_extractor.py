@@ -20,7 +20,7 @@ def fetch_jobs_rona(url):
         for i in range(job_cards.count()):            
             card = job_cards.nth(i)
             
-            title = card.locator("a.text-xl.font-black.uppercase.text-black").inner_text().strip()
+            title = card.locator("div.text-xl.font-black.uppercase.text-black").inner_text()
             link = ""
             location = ""
             # link = card.get_attribute("href")
