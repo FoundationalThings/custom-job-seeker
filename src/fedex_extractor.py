@@ -1,5 +1,7 @@
 from playwright.sync_api import sync_playwright
 
+BASE_URL = "https://careers.fedex.com/"
+
 def fetch_jobs_fedex(url):
     """Fetch FedEx jobs using Playwright."""
     with sync_playwright() as p:
@@ -19,7 +21,7 @@ def fetch_jobs_fedex(url):
             card = job_cards.nth(i)
             title = card.locator(".results-list__item-title").inner_text()
             link = card.locator("a.results-list__item-title--link").get_attribute("href")
-            link = link = "https://careers.fedex.com/" + link
+            link = link = BASE_URL + link
             location = card.locator(".results-list__item-street--label").inner_text()
             
             jobs.append({
