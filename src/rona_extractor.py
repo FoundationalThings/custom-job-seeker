@@ -20,6 +20,7 @@ def fetch_jobs_rona(url):
         
 
         jobs = []
+
         
         # page.goto(f"{BASE_URL}/careers")
       
@@ -38,11 +39,11 @@ def fetch_jobs_rona(url):
         #     # link = card.get_attribute("href")
         #     # location = card.locator("div.job-location").inner_text()
             
-        #     jobs.append({
-        #         "title": title,
-        #         "link": link,
-        #         "location": location
-        #     })
+            jobs.append({
+                "title": titles[0],
+                "link": "",
+                "location": ""
+            })
         
         browser.close()
         return jobs
