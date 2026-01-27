@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from fedex_extractor import fetch_jobs_fedex
 from home_depot_extractor import fetch_jobs_home_depot
+from rona_extractor import fetch_jobs_rona
 
 
 SPREADSHEET_ID = "1jKdw4CsEbBOarEfYaDODsI88OsNkJBHARB3sV9XaQYQ"
@@ -15,6 +16,8 @@ def fetch_jobs(url):
         return fetch_jobs_fedex(url)
     elif "homedepot" in url.lower():
         return fetch_jobs_home_depot(url)
+    elif "rona" in url.lower():
+        return fetch_jobs_rona(url)
     else:
         try:
             resp = requests.get(url, timeout=10)
