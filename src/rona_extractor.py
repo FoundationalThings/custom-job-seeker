@@ -9,28 +9,40 @@ def fetch_jobs_rona(url):
         page = browser.new_page()
         
         # Navigate to the RONA jobs page
-        page.goto(f"{BASE_URL}/careers")
-      
-        # Wait for dynamic content to load
-        page.wait_for_selector("main")  # RONA list
+        page.goto(f"{BASE_URL}/careers", wait_until="networkidle")
+        page.wait_for_selector("a.text-xl.font-black.uppercase.text-black")
         
-        # Extract job details
+        titles = page.locator("a.text-xl.font-black.uppercase.text-black")
+        print("Found:", titles.count())
+        
+        for i in range(titles.count()):
+            print(titles.nth(i).inner_text())
+        
+
         jobs = []
-        job_cards = page.locator("div.flex.w-full.items-center")  # RONA job
-        for i in range(job_cards.count()):            
-            card = job_cards.nth(i)
+        
+        # page.goto(f"{BASE_URL}/careers")
+      
+        # # Wait for dynamic content to load
+        # page.wait_for_selector("main")  # RONA list
+        
+        # # Extract job details
+        # jobs = []
+        # job_cards = page.locator("div.flex.w-full.items-center")  # RONA job
+        # for i in range(job_cards.count()):            
+        #     card = job_cards.nth(i)
             
-            title = card.locator("a.text-xl.font-black.uppercase.text-black").inner_text()
-            link = card.locator("a.text-xl.font-black.uppercase.text-black").get_attribute("href")
-            location = ""
-            # link = card.get_attribute("href")
-            # location = card.locator("div.job-location").inner_text()
+        #     title = card.locator("a.text-xl.font-black.uppercase.text-black").inner_text()
+        #     link = card.locator("a.text-xl.font-black.uppercase.text-black").get_attribute("href")
+        #     location = ""
+        #     # link = card.get_attribute("href")
+        #     # location = card.locator("div.job-location").inner_text()
             
-            jobs.append({
-                "title": title,
-                "link": link,
-                "location": location
-            })
+        #     jobs.append({
+        #         "title": title,
+        #         "link": link,
+        #         "location": location
+        #     })
         
         browser.close()
         return jobs
