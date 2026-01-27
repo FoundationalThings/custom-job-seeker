@@ -16,7 +16,7 @@ def fetch_jobs_rona(url):
         
         # Extract job details
         jobs = []
-        job_cards = page.locator("div.flex.flex-col.gap-6.border.p-6")  # RONA job
+        job_cards = page.locator("div.flex.w-full.items-center")  # RONA job
         for i in range(job_cards.count()):            
             card = job_cards.nth(i)
             
