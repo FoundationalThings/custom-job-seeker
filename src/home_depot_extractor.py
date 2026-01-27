@@ -18,9 +18,9 @@ def fetch_jobs_home_depot(url):
         for i in range(job_cards.count()):            
             card = job_cards.nth(i)
             
-            title = card.locator("div.job-title").inner_text()
+            title = card.locator("div.job-info.job-title").inner_text()
             link = card.locator("a.job-link").get_attribute("href")
-            location = card.locator("div.job-location").inner_text()
+            location = card.locator("div.job-info.job-location").inner_text()
             
             jobs.append({
                 "title": title,
