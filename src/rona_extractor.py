@@ -13,13 +13,17 @@ def fetch_jobs_rona(url):
         page.wait_for_selector("a.text-xl.font-black.uppercase.text-black")
         
         titles = page.locator("a.text-xl.font-black.uppercase.text-black")
-        print("Found:", titles.count())
-        
-        for i in range(titles.count()):
-            print(titles.nth(i).inner_text())
-        
+
 
         jobs = []
+
+        for i in range(titles.count()):            
+            jobs.append({
+                "title": titles.nth(i).inner_text(),
+                "link": "",
+                "location": ""
+            })
+        
 
         
         # page.goto(f"{BASE_URL}/careers")
@@ -39,11 +43,7 @@ def fetch_jobs_rona(url):
         #     # link = card.get_attribute("href")
         #     # location = card.locator("div.job-location").inner_text()
             
-            jobs.append({
-                "title": titles[0],
-                "link": "",
-                "location": ""
-            })
+
         
         browser.close()
         return jobs
