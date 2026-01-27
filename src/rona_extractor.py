@@ -1,0 +1,36 @@
+from playwright.sync_api import sync_playwright
+
+BASE_URL = "https://jobs.ronainc.ca"
+
+def fetch_jobs_rona(url):
+    """Fetch RONA jobs using Playwright."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        
+        # Navigate to the RONA jobs page
+        page.goto(f"{BASE_URL}/careers")
+      
+        # Wait for dynamic content to load
+        page.wait_for_selector("div.flex.flex-col.gap-6.border.p-6")  # RONA list
+        
+        # Extract job details
+        jobs = []
+        job_cards = page.locator("div.flex.flex-col.gap-6.border.p-6")  # RONA job
+        for i in range(job_cards.count()):            
+            card = job_cards.nth(i)
+            
+            title = card.locator("a.text-xl.font-black.uppercase.text-black").inner_text().strip()
+            link = ""
+            location = ""
+            # link = card.get_attribute("href")
+            # location = card.locator("div.job-location").inner_text()
+            
+            jobs.append({
+                "title": title,
+                "link": link,
+                "location": location
+            })
+        
+        browser.close()
+        return jobs
