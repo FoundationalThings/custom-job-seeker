@@ -14,13 +14,13 @@ def fetch_jobs_home_depot(url):
         
         # Extract job details
         jobs = []
-        job_cards = page.locator("li")  # Home Depot job
+        job_cards = page.locator("ul#job-list-items > li > a.job-link")  # Home Depot job
         for i in range(job_cards.count()):            
             card = job_cards.nth(i)
             
-            title = card.locator("div.job-info.job-title").inner_text()
-            link = card.locator("a.job-link").get_attribute("href")
-            location = card.locator("div.job-info.job-location").inner_text()
+            link = card.get_attribute("href")
+            title = card.locator("div.job-title").inner_text()
+            location = card.locator("div.job-location").inner_text()
             
             jobs.append({
                 "title": title,
