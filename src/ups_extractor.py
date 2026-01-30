@@ -9,11 +9,11 @@ def fetch_jobs_ups(url):
         page.goto(url)
         
         # Wait for dynamic content to load
-        page.wait_for_selector(".phw-grid")  # the UPS jobslist
+        page.wait_for_selector(".results-state")  # the UPS jobslist
         
         # Extract job details
         jobs = []
-        job_cards = page.locator(".phw-card-block")  # UPS job
+        job_cards = page.locator('[data-ph-at-id="jobs-list-item"]')
         for i in range(job_cards.count()):
             card = job_cards.nth(i)
             title = card.locator("h3.a").inner_text()
