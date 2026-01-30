@@ -10,7 +10,7 @@ from rona_extractor import fetch_jobs_rona
 SPREADSHEET_ID = "1jKdw4CsEbBOarEfYaDODsI88OsNkJBHARB3sV9XaQYQ"
 RANGE = "A2:C"
 
-def fetch_jobs(url):
+def fetch_jobs(company, url):
     """Route to correct job extractor based on site."""
     if "fedex" in url.lower():
         return fetch_jobs_fedex(url)
@@ -18,9 +18,9 @@ def fetch_jobs(url):
         return fetch_jobs_home_depot(url)
     elif "rona" in url.lower():
         return fetch_jobs_rona(url)
-    elif "ups"
+    elif "ups" in company.lower():
         return fetch_jobs_ups(url)
-    elif "purolator"
+    elif "purolator" in company.lower():
         return fetch_jobs_purolator(url)
     else:
         try:
@@ -71,7 +71,7 @@ def main():
     print("Extracting jobs...")
     for company, url in enabled_companies:
         print(f"\n=== {company} ({url}) ===")
-        jobs = fetch_jobs(url)
+        jobs = fetch_jobs(company, url)
         if not jobs:
             print("No jobs found or could not fetch page.")
             continue
