@@ -18,6 +18,10 @@ def fetch_jobs(url):
         return fetch_jobs_home_depot(url)
     elif "rona" in url.lower():
         return fetch_jobs_rona(url)
+    elif "ups"
+        return fetch_jobs_ups(url)
+    elif "purolator"
+        return fetch_jobs_purolator(url)
     else:
         try:
             resp = requests.get(url, timeout=10)
