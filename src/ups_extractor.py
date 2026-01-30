@@ -16,8 +16,8 @@ def fetch_jobs_ups(url):
         job_cards = page.locator('[data-ph-at-id="jobs-list-item"]')
         for i in range(job_cards.count()):
             card = job_cards.nth(i)
-            title = card.locator("h3.a").inner_text()
-            link = card.locator("h3.a").get_attribute("href")
+            title = card.locator('[data-ph-at-id="job-link"]').inner_text()
+            link = card.locator('[data-ph-at-id="job-link"]').get_attribute("href")
             location = card.locator(".job-location").inner_text()
             
             jobs.append({
